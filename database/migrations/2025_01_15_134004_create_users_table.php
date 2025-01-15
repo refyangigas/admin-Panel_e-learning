@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('email')->unique();
+            $table->string('full_name');
+            $table->string('password');
+            $table->string('otp')->nullable();
+            $table->float('score')->nullable(); // untuk nilai post test
             $table->timestamps();
         });
     }
