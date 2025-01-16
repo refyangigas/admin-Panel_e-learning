@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MaterialController;
+use App\Http\Controllers\Admin\PreTestController;
+use App\Http\Controllers\Admin\PostTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,13 @@ use App\Http\Controllers\Admin\MaterialController;
 */
 
 // routes/web.php
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('materials', MaterialController::class);
-}
+Route::prefix('admin')->name('admin.')->group(
+    function () {
+        Route::resource('materials', MaterialController::class);
+        // Pre Tests
+        Route::resource('pre-tests', PreTestController::class);
+
+        // Post Tests
+        Route::resource('post-tests', PostTestController::class);
+    }
 );
