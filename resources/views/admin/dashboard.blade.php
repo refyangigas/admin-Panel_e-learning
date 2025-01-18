@@ -58,7 +58,7 @@
 
 <body>
     <div class="sidebar">
-        <h3 class="text-center">Admin Panel</h3>
+        <h3 class="text-center">Admin E-Learning</h3>
         <a href="{{ route('admin.dashboard') }}" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         <a href="{{ route('admin.materials.index') }}"><i class="fas fa-book"></i> Materials</a>
         <a href="{{ route('admin.pre-tests.index') }}"><i class="fas fa-file-alt"></i> Pre-Test</a>
