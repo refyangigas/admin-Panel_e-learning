@@ -19,6 +19,7 @@
                     <tr>
                         <th>No</th>
                         <th>Judul</th>
+                        <th>Isi Materi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -27,6 +28,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $material->title }}</td>
+                            <td>{{ $material->content }}</td>
                             <td>
                                 <a href="{{ route('admin.materials.edit', $material->id) }}"
                                     class="btn btn-sm btn-info">Edit</a>
@@ -49,7 +51,7 @@
 @endsection
 
 <!-- resources/views/admin/materials/create.blade.php -->
-@extends('layouts.admin')
+{{-- @extends('layouts.admin') --}}
 
 @section('content')
     <div class="card">

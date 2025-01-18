@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             min-height: 100vh;
             margin: 0;
         }
+
         .sidebar {
             width: 250px;
             background-color: #343a40;
@@ -20,6 +22,7 @@
             height: 100%;
             padding-top: 1rem;
         }
+
         .sidebar a {
             color: #fff;
             text-decoration: none;
@@ -27,17 +30,21 @@
             display: block;
             border-radius: 4px;
         }
+
         .sidebar a:hover {
             background-color: #495057;
         }
+
         .sidebar .active {
             background-color: #007bff;
         }
+
         .content {
             margin-left: 250px;
             padding: 20px;
             width: calc(100% - 250px);
         }
+
         .header {
             background-color: #007bff;
             color: white;
@@ -48,6 +55,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="sidebar">
         <h3 class="text-center">Admin Panel</h3>
@@ -63,7 +71,6 @@
     <div class="content">
         <div class="header">
             <h4>Dashboard</h4>
-            <a href="#" class="btn btn-light btn-sm">Logout</a>
         </div>
 
         <div class="container mt-4">
@@ -135,4 +142,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
