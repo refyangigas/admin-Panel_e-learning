@@ -22,8 +22,8 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'judul' => 'required|max:255',
-            'url' => 'required|url'
+            'title' => 'required|max:255',
+            'youtube_url' => 'required|url'
         ]);
 
         Video::create($validated);
@@ -39,8 +39,8 @@ class VideoController extends Controller
     public function update(Request $request, Video $video)
     {
         $validated = $request->validate([
-            'judul' => 'required|max:255',
-            'url' => 'required|url'
+            'title' => 'required|max:255',
+            'youtube_url' => 'required|url'
         ]);
 
         $video->update($validated);
