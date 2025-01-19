@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,7 @@ Route::prefix('v1')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::get('user', [AuthController::class, 'user']);
     });
+
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendOTP']);
+    Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOTP']);
 });
