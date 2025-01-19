@@ -1,78 +1,64 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class ForgotPasswordController extends Controller
 {
     public function sendOTP(Request $request)
     {
-        try {
-            $request->validate([
-                'email' => 'required|email|exists:users'
-            ]);
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+        ]);
 
-            // Generate 6 digit OTP
-            $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+        $user = User::where('email', $request->email)->first();
+        $otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT); // Generate 6 digit OTP
 
-            // Save OTP to database
-            $user = User::where('email', $request->email)->first();
-            $user->otp = $otp;
-            $user->save();
+        $user->update([
+            'otp' => $otp
+        ]);
 
-            // Send email
-            Mail::send('emails.otp', ['otp' => $otp], function ($message) use ($request) {
-                $message->to($request->email)
-                    ->subject('Password Reset OTP');
-            });
+        // Kirim email
+        Mail::send('emails.forgot-password', ['otp' => $otp], function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject('Reset Password OTP');
+        });
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'OTP sent successfully'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ], 500);
-        }
+        return response()->json([
+            'message' => 'OTP has been sent to your email'
+        ]);
     }
 
     public function verifyOTP(Request $request)
     {
-        try {
-            $request->validate([
-                'email' => 'required|email|exists:users',
-                'otp' => 'required|string|size:6'
-            ]);
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'otp' => 'required|string',
+            'password' => 'required|min:6|confirmed',
+        ]);
 
-            $user = User::where('email', $request->email)
-                ->where('otp', $request->otp)
-                ->first();
+        $user = User::where('email', $request->email)
+            ->where('otp', $request->otp)
+            ->first();
 
-            if (!$user) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Invalid OTP'
-                ], 400);
-            }
-
-            // Clear OTP after successful verification
-            $user->otp = null;
-            $user->save();
-
+        if (!$user) {
             return response()->json([
-                'status' => 'success',
-                'message' => 'OTP verified successfully'
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ], 500);
+                'message' => 'Invalid OTP'
+            ], 400);
         }
+
+        $user->update([
+            'password' => bcrypt($request->password),
+            'otp' => null
+        ]);
+
+        return response()->json([
+            'message' => 'Password has been reset successfully'
+        ]);
     }
 }
