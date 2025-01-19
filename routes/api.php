@@ -29,4 +29,9 @@ Route::prefix('v1')->group(function () {
 
     Route::post('forgot-password', [ForgotPasswordController::class, 'sendOTP']);
     Route::post('verify-otp', [ForgotPasswordController::class, 'verifyOTP']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/materials', [App\Http\Controllers\API\MaterialController::class, 'index']);
+        Route::get('/materials/{id}', [App\Http\Controllers\API\MaterialController::class, 'show']);
+    });
 });
