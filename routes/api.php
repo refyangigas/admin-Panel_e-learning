@@ -35,11 +35,9 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/materials', [App\Http\Controllers\API\MaterialController::class, 'index']);
         Route::get('/materials/{id}', [App\Http\Controllers\API\MaterialController::class, 'show']);
-        // Routes for Pre Test
-        Route::get('/pre-tests', [App\Http\Controllers\API\PreTestController::class, 'index']);
-
-        // Routes for Post Test
-        Route::get('/post-tests', [App\Http\Controllers\API\PostTestController::class, 'index']);
-        Route::post('/post-tests/submit', [App\Http\Controllers\API\PostTestController::class, 'submitScore']);
+        // Pre Test Routes
+        Route::get('/pre-test/questions', [PreTestController::class, 'getQuestions']);
+        Route::get('/post-test/questions', [PostTestController::class, 'getQuestions']);
+        Route::post('/post-test/submit', [PostTestController::class, 'submitTest']);
     });
 });

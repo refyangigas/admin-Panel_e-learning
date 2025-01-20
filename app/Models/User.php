@@ -29,4 +29,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserProfile::class);
     }
+
+    public function preTests()
+    {
+        return $this->hasMany(TestResult::class)->where('test_type', 'pre_test');
+    }
+
+    public function postTests()
+    {
+        return $this->hasMany(TestResult::class)->where('test_type', 'post_test');
+    }
 }
