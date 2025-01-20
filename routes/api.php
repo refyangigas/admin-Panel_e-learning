@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ForgotPasswordController;
+use App\Http\Controllers\Api\PostTestController;
+use App\Http\Controllers\API\PreTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +35,11 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/materials', [App\Http\Controllers\API\MaterialController::class, 'index']);
         Route::get('/materials/{id}', [App\Http\Controllers\API\MaterialController::class, 'show']);
+        // Routes for Pre Test
+        Route::get('/pre-tests', [App\Http\Controllers\API\PreTestController::class, 'index']);
+
+        // Routes for Post Test
+        Route::get('/post-tests', [App\Http\Controllers\API\PostTestController::class, 'index']);
+        Route::post('/post-tests/submit', [App\Http\Controllers\API\PostTestController::class, 'submitScore']);
     });
 });
