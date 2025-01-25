@@ -4,8 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ForgotPasswordController;
-use App\Http\Controllers\Api\PostTestController;
-use App\Http\Controllers\API\PreTestController;
+use App\Http\Controllers\Api\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +34,15 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/materials', [App\Http\Controllers\API\MaterialController::class, 'index']);
         Route::get('/materials/{id}', [App\Http\Controllers\API\MaterialController::class, 'show']);
-        // Pre Test Routes
-        Route::get('/pre-test/questions', [PreTestController::class, 'getQuestions']);
-        Route::get('/post-test/questions', [PostTestController::class, 'getQuestions']);
-        Route::post('/post-test/submit', [PostTestController::class, 'submitTest']);
+
+        // Pre-test routes
+        Route::get('/pre-test/questions', [TestController::class, 'getPreTestQuestions']);
+        Route::get('/pre-test/questions/{index}', [TestController::class, 'getPreTestQuestion']);
+        Route::post('/pre-test/submit', [TestController::class, 'submitPreTest']);
+
+        // Post-test routes
+        Route::get('/post-test/questions', [TestController::class, 'getPostTestQuestions']);
+        Route::get('/post-test/questions/{index}', [TestController::class, 'getPostTestQuestion']);
+        Route::post('/post-test/submit', [TestController::class, 'submitPostTest']);
     });
 });

@@ -1,19 +1,19 @@
 <?php
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TestResult extends Model
+class PreTestResult extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'user_id',
-        'test_type', // 'pre' atau 'post'
         'score',
-        'completed_at'
-    ];
-
-    protected $casts = [
-        'completed_at' => 'datetime'
+        'total_questions',
+        'correct_answers',
     ];
 
     public function user()

@@ -6,15 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-        Schema::create('test_results', function (Blueprint $table) {
+        Schema::create('post_test_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->enum('test_type', ['pre', 'post']);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->decimal('score', 5, 2);
             $table->integer('total_questions');
             $table->integer('correct_answers');
@@ -22,11 +18,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('test_results');
+        Schema::dropIfExists('post_test_results');
     }
 };
