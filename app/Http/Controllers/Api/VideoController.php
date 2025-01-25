@@ -3,17 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserGuide;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
-class UserGuideController extends Controller
-{
-    public function index()
-    {
-        $guides = UserGuide::all();
+class VideoController extends Controller {
+    public function index() {
+        $videos = Video::all();
         return response()->json([
             'status' => 'success',
-            'data' => $guides
+            'data' => $videos
         ]);
     }
 }

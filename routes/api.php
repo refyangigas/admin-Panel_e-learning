@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\ReferenceController;
 use App\Http\Controllers\Api\UserGuideController;
+use App\Http\Controllers\Api\VideoController;
+use App\Http\Controllers\Api\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +51,9 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/references', [ReferenceController::class, 'index']);
         Route::get('/user-guides', [UserGuideController::class, 'index']);
+
+        Route::get('/videos', [VideoController::class, 'index']);
+
+        Route::get('/profile', [ProfileController::class, 'index']);
     });
 });
