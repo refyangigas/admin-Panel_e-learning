@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\TestController;
+use App\Http\Controllers\Api\ReferenceController;
+use App\Http\Controllers\Api\UserGuideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +46,8 @@ Route::prefix('v1')->group(function () {
         Route::get('/post-test/questions', [TestController::class, 'getPostTestQuestions']);
         Route::get('/post-test/questions/{index}', [TestController::class, 'getPostTestQuestion']);
         Route::post('/post-test/submit', [TestController::class, 'submitPostTest']);
+
+        Route::get('/references', [ReferenceController::class, 'index']);
+        Route::get('/user-guides', [UserGuideController::class, 'index']);
     });
 });
