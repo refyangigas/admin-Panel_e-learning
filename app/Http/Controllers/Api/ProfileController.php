@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    public function show()
+    public function index()
     {
         $user = auth()->user();
         $profile = $user->profile;
