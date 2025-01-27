@@ -3,12 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\TestController;
-use App\Http\Controllers\Api\ReferenceController;
-use App\Http\Controllers\Api\UserGuideController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\API\MaterialController;
+use App\Http\Controllers\Api\ReferenceController;
+use App\Http\Controllers\Api\UserGuideController;
+use App\Http\Controllers\Api\ForgotPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +37,8 @@ Route::prefix('v1')->group(function () {
     Route::post('verify-otp', [ForgotPasswordController::class, 'verifyOTP']);
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/materials', [App\Http\Controllers\API\MaterialController::class, 'index']);
-        Route::get('/materials/{id}', [App\Http\Controllers\API\MaterialController::class, 'show']);
+        Route::get('/materials', [MaterialController::class, 'index']);
+        Route::get('/materials/{id}', [MaterialController::class, 'show']);
 
         // Pre-test routes
         Route::get('/pre-test/questions', [TestController::class, 'getPreTestQuestions']);
