@@ -11,6 +11,7 @@ class ProfileController extends Controller
         $user = auth()->user();
         $profile = $user->profile;
 
+        // Mengambil 3 score terakhir
         $lastThreeScores = $user->postTestResults()
             ->latest()
             ->take(3)
