@@ -25,8 +25,12 @@ class User extends Authenticatable
         'otp'
     ];
 
-    public function profile()
+    public function postTestResult()
     {
-        return $this->hasOne(UserProfile::class);
+        return $this->hasOne(PostTestResult::class);
+    }
+    public function preTestResult()
+    {
+        return $this->hasOne(PreTestResult::class);
     }
 }
