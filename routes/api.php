@@ -6,10 +6,11 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\ProfileController;
-use App\Http\Controllers\API\MaterialController;
+use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\ReferenceController;
 use App\Http\Controllers\Api\UserGuideController;
 use App\Http\Controllers\Api\ForgotPasswordController;
+
 
 /*
 |--------------------------------------------------------------------------
