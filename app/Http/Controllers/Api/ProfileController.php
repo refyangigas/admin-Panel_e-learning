@@ -14,7 +14,6 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        // Gabungkan data user dan profile
         $data = [
             'user' => [
                 'id' => $user->id,
@@ -33,7 +32,7 @@ class ProfileController extends Controller
                 ->map(function ($result) {
                     return [
                         'score' => $result->score,
-                        'date' => $result->created_at->format('Y-m-d H:i:s')
+                        'date' => $result->created_at->setTimezone('Asia/Jakarta')->toIso8601String()
                     ];
                 })
         ];
@@ -88,7 +87,7 @@ class ProfileController extends Controller
                     ->get()
                     ->map(fn($result) => [
                         'score' => $result->score,
-                        'date' => $result->created_at->format('Y-m-d H:i:s')
+                        'date' => $result->created_at->toIso8601String()
                     ])
             ]);
         } catch (\Exception $e) {
