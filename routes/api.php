@@ -57,5 +57,6 @@ Route::prefix('v1')->group(function () {
         Route::get('/videos', [VideoController::class, 'index']);
 
         Route::get('/profile', [ProfileController::class, 'index']);
+        Route::put('/profile', [ProfileController::class, 'update']);
     });
 });
