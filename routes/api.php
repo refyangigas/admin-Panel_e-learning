@@ -54,7 +54,8 @@ Route::prefix('v1')->group(function () {
         Route::get('/references', [ReferenceController::class, 'index']);
         Route::get('/user-guides', [UserGuideController::class, 'index']);
 
-        Route::get('/videos', [VideoController::class, 'index']);
+        Route::get('videos', [VideoController::class, 'index']);
+        Route::get('videos/{id}', [VideoController::class, 'show']);
 
         Route::get('/profile', [ProfileController::class, 'index']);
         Route::put('/profile', [ProfileController::class, 'update']);
