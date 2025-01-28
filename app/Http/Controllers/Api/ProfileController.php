@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\PostTestResult;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -12,7 +15,7 @@ class ProfileController extends Controller
         $profile = $user->profile;
 
         // Mengambil 3 score terakhir
-        $lastThreeScores = $user->postTestResults()
+        $lastThreeScores = PostTestResult::where('user_id', $user->id)
             ->latest()
             ->take(3)
             ->get()
@@ -23,19 +26,10 @@ class ProfileController extends Controller
                 ];
             });
 
+        // Return response sesuai kebutuhan
         return response()->json([
-            'status' => 'success',
-            'data' => [
-                'id' => $user->id,
-                'email' => $user->email,
-                'full_name' => $user->full_name,
-                'scores' => $lastThreeScores,
-                'profile' => $profile ? [
-                    'birth_place' => $profile->birth_place,
-                    'birth_date' => $profile->birth_date,
-                    'gender' => $profile->gender,
-                ] : null
-            ]
+            'profile' => $profile,
+            'last_three_scores' => $lastThreeScores
         ]);
     }
 }
